@@ -1,5 +1,5 @@
 const inquirer = require("inquirer");
-const cTable = require("console.table");
+require("console.table");
 const db = require("./db/connection");
 
 // WHEN I start the application
@@ -33,6 +33,18 @@ function runOptions() {
       case "View All EMPLOYEES":
         viewEmployee();
         break;
+      case "Add DEPARTMENT":
+        addDepartment();
+        break;
+      case "Add ROLE":
+        addRole();
+        break;
+      case "Add EMPLOYEE":
+        addEmployee();
+        break;
+      case "Update EMPLOYEE ROLE":
+        updateEmployee();
+        break;
     }
   });
 }
@@ -40,17 +52,19 @@ function runOptions() {
 // WHEN I choose to VIEW all departments
 // THEN I am presented with a formatted table showing department names and department ids
 function viewDepartments() {
-  db.promise().query("SELECT * FROM department").then(([rows]) => {
-    console.table(rows);
-    runOptions();
-  });
+  db.promise()
+    .query("SELECT * FROM department")
+    .then(([rows]) => {
+      console.table(rows);
+      runOptions();
+    });
 }
 
 // WHEN I choose to VIEW all roles
 // THEN I am presented with the job title, role id, the department that role belongs to, and the salary for that role
 function viewRoles() {
   db.query("SELECT * FROM role", function (err, results) {
-    console.log(results);
+    console.table(results);
     runOptions();
   });
 }
@@ -66,14 +80,44 @@ function viewEmployee() {
 
 // WHEN I choose to ADD a department
 // THEN I am prompted to enter the name of the department and that department is added to the database
+// !!!NEED to insert and PUSH into the department table!!!
+function addDepartment() {
+    // inquirer prompt to get the department name 
+    // .then(answers => { INSERT INTO DEPARTMENT (d)
+  db.query("SELECT * FROM department", function (err, results) {
+    console.log(results);
+    runOptions();
+  });
+}
 
 // WHEN I choose to ADD a role
 // THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
+// !!!NEED to insert and PUSH into the employee role table!!!
+function addRole() {
+    db.query("SELECT * FROM role", function (err, results) {
+      console.log(results);
+      runOptions();
+    });
+  }
 
 // WHEN I choose to ADD an employee
 // THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
+// !!!NEED to insert and PUSH into the employee table!!!
+function addEmployee() {
+    db.query("SELECT * FROM role", function (err, results) {
+      console.log(results);
+      runOptions();
+    });
+  }
 
 // WHEN I choose to UPDATE an employee role
 // THEN I am prompted to select an employee to update and their new role and this information is updated in the database
+// !!!NEED to insert and PUSH into the employee role table!!!
+function updateEmployeeRole() {
+    db.query("SELECT * FROM role", function (err, results) {
+      console.log(results);
+      runOptions();
+    });
+  }
 
 runOptions();
