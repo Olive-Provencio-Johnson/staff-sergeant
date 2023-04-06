@@ -83,11 +83,23 @@ function viewEmployee() {
 // !!!NEED to insert and PUSH into the department table!!!
 function addDepartment() {
     // inquirer prompt to get the department name 
-    // .then(answers => { INSERT INTO DEPARTMENT (d)
-  db.query("SELECT * FROM department", function (err, results) {
-    console.table(results);
-    runOptions();
-  });
+    inquirer
+    .prompt({
+      type: "input",
+      message: "Enter the department name:",
+      name: "departmentName",
+    })
+    .then((answers) => {
+      db.query(
+        "INSERT INTO department (department_name) VALUES (?)",
+        [answers.departmentName],
+        function (err, results) {
+          if (err) throw err;
+          console.log(`${answers.departmentName} department has been added successfully!`);
+          runOptions();
+        }
+      );
+    });
 }
 
 // WHEN I choose to ADD a role
@@ -104,7 +116,7 @@ function addRole() {
 // THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
 // !!!NEED to insert and PUSH into the employee table!!!
 function addEmployee() {
-    db.query("SELECT * FROM role", function (err, results) {
+    db.query("SELECT * FROM employee", function (err, results) {
       console.table(results);
       runOptions();
     });
