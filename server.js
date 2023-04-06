@@ -147,10 +147,44 @@ function addRole() {
 // THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
 // !!!NEED to insert and PUSH into the employee table!!!
 function addEmployee() {
-  db.query("SELECT * FROM employee", function (err, results) {
-    console.table(results);
-    runOptions();
-  });
+    inquirer
+    .prompt([
+      {
+        type: "input",
+        message: "Enter the employee's first name:",
+        name: "firstName",
+      },
+      {
+        type: "input",
+        message: "Enter the employee's last name:",
+        name: "lastName",
+      },
+      {
+        type: "input",
+        message: "Enter the employee's role id:",
+        name: "roleId",
+      },
+      {
+        type: "input",
+        message: "Enter the employee's manager id:",
+        name: "managerId",
+      },
+    ])
+    .then((answers) => {
+      db.query(
+        "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)",
+        [answers.firstName, answers.lastName, answers.roleId, answers.managerId],
+        function (err, results) {
+          if (err) throw err;
+          console.log(
+            `${
+              (answers.firstName, answers.lastName, answers.roleId, answers.managerId)
+            } have been added successfully to the database!`
+          );
+          runOptions();
+        }
+      );
+    });
 }
 
 // WHEN I choose to UPDATE an employee role
