@@ -80,7 +80,6 @@ function viewEmployee() {
 
 // WHEN I choose to ADD a department
 // THEN I am prompted to enter the name of the department and that department is added to the database
-// !!!NEED to insert and PUSH into the department table!!!
 function addDepartment() {
   // inquirer prompt to get the department name
   inquirer
@@ -106,7 +105,6 @@ function addDepartment() {
 
 // WHEN I choose to ADD a role
 // THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
-// !!!NEED to insert and PUSH into the employee role table!!!
 function addRole() {
   inquirer
     .prompt([
@@ -132,11 +130,7 @@ function addRole() {
         [answers.roleTitle, answers.roleSalary, answers.departmentId],
         function (err, results) {
           if (err) throw err;
-          console.log(
-            `${
-              (answers.roleTitle, answers.roleSalary, answers.departmentId)
-            } have been added successfully!`
-          );
+          console.log(`${answers.roleTitle} has been added successfully!`);
           runOptions();
         }
       );
@@ -145,7 +139,6 @@ function addRole() {
 
 // WHEN I choose to ADD an employee
 // THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
-// !!!NEED to insert and PUSH into the employee table!!!
 function addEmployee() {
   inquirer
     .prompt([
@@ -183,11 +176,8 @@ function addEmployee() {
           if (err) throw err;
           console.log(
             `${
-              (answers.firstName,
-              answers.lastName,
-              answers.roleId,
-              answers.managerId)
-            } have been added successfully to the database!`
+              (answers.firstName, answers.lastName)
+            } has been added successfully to the database!`
           );
           runOptions();
         }
@@ -197,7 +187,6 @@ function addEmployee() {
 
 // WHEN I choose to UPDATE an employee role
 // THEN I am prompted to select an employee to update and their new role and this information is updated in the database
-// !!!NEED to insert and PUSH into the employee role table!!!
 function updateEmployee() {
   inquirer
     .prompt([
