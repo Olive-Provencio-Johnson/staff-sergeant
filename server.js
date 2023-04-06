@@ -82,8 +82,8 @@ function viewEmployee() {
 // THEN I am prompted to enter the name of the department and that department is added to the database
 // !!!NEED to insert and PUSH into the department table!!!
 function addDepartment() {
-    // inquirer prompt to get the department name 
-    inquirer
+  // inquirer prompt to get the department name
+  inquirer
     .prompt({
       type: "input",
       message: "Enter the department name:",
@@ -95,7 +95,9 @@ function addDepartment() {
         [answers.departmentName],
         function (err, results) {
           if (err) throw err;
-          console.log(`${answers.departmentName} department has been added successfully!`);
+          console.log(
+            `${answers.departmentName} department has been added successfully!`
+          );
           runOptions();
         }
       );
@@ -106,30 +108,59 @@ function addDepartment() {
 // THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
 // !!!NEED to insert and PUSH into the employee role table!!!
 function addRole() {
-    db.query("SELECT * FROM role", function (err, results) {
-      console.table(results);
-      runOptions();
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        message: "Enter the role title:",
+        name: "roleTitle",
+      },
+      {
+        type: "input",
+        message: "Enter the role salary:",
+        name: "roleSalary",
+      },
+      {
+        type: "input",
+        message: "Enter the role's department id:",
+        name: "departmentId",
+      },
+    ])
+    .then((answers) => {
+      db.query(
+        "INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)",
+        [answers.roleTitle, answers.roleSalary, answers.departmentId],
+        function (err, results) {
+          if (err) throw err;
+          console.log(
+            `${
+              (answers.roleTitle, answers.roleSalary, answers.departmentId)
+            } have been added successfully!`
+          );
+          runOptions();
+        }
+      );
     });
-  }
+}
 
 // WHEN I choose to ADD an employee
 // THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
 // !!!NEED to insert and PUSH into the employee table!!!
 function addEmployee() {
-    db.query("SELECT * FROM employee", function (err, results) {
-      console.table(results);
-      runOptions();
-    });
-  }
+  db.query("SELECT * FROM employee", function (err, results) {
+    console.table(results);
+    runOptions();
+  });
+}
 
 // WHEN I choose to UPDATE an employee role
 // THEN I am prompted to select an employee to update and their new role and this information is updated in the database
 // !!!NEED to insert and PUSH into the employee role table!!!
 function updateEmployee() {
-    db.query("SELECT * FROM role", function (err, results) {
-      console.table(results);
-      runOptions();
-    });
-  }
+  db.query("SELECT * FROM role", function (err, results) {
+    console.table(results);
+    runOptions();
+  });
+}
 
 runOptions();
