@@ -73,7 +73,7 @@ function viewRoles() {
 // THEN I am presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
 function viewEmployee() {
   db.query("SELECT * FROM employee", function (err, results) {
-    console.log(results);
+    console.table(results);
     runOptions();
   });
 }
@@ -85,7 +85,7 @@ function addDepartment() {
     // inquirer prompt to get the department name 
     // .then(answers => { INSERT INTO DEPARTMENT (d)
   db.query("SELECT * FROM department", function (err, results) {
-    console.log(results);
+    console.table(results);
     runOptions();
   });
 }
@@ -95,7 +95,7 @@ function addDepartment() {
 // !!!NEED to insert and PUSH into the employee role table!!!
 function addRole() {
     db.query("SELECT * FROM role", function (err, results) {
-      console.log(results);
+      console.table(results);
       runOptions();
     });
   }
@@ -105,7 +105,7 @@ function addRole() {
 // !!!NEED to insert and PUSH into the employee table!!!
 function addEmployee() {
     db.query("SELECT * FROM role", function (err, results) {
-      console.log(results);
+      console.table(results);
       runOptions();
     });
   }
@@ -115,7 +115,7 @@ function addEmployee() {
 // !!!NEED to insert and PUSH into the employee role table!!!
 function updateEmployeeRole() {
     db.query("SELECT * FROM role", function (err, results) {
-      console.log(results);
+      console.table(results);
       runOptions();
     });
   }
