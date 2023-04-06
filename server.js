@@ -147,7 +147,7 @@ function addRole() {
 // THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
 // !!!NEED to insert and PUSH into the employee table!!!
 function addEmployee() {
-    inquirer
+  inquirer
     .prompt([
       {
         type: "input",
@@ -173,12 +173,20 @@ function addEmployee() {
     .then((answers) => {
       db.query(
         "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)",
-        [answers.firstName, answers.lastName, answers.roleId, answers.managerId],
+        [
+          answers.firstName,
+          answers.lastName,
+          answers.roleId,
+          answers.managerId,
+        ],
         function (err, results) {
           if (err) throw err;
           console.log(
             `${
-              (answers.firstName, answers.lastName, answers.roleId, answers.managerId)
+              (answers.firstName,
+              answers.lastName,
+              answers.roleId,
+              answers.managerId)
             } have been added successfully to the database!`
           );
           runOptions();
@@ -191,10 +199,33 @@ function addEmployee() {
 // THEN I am prompted to select an employee to update and their new role and this information is updated in the database
 // !!!NEED to insert and PUSH into the employee role table!!!
 function updateEmployee() {
-  db.query("SELECT * FROM role", function (err, results) {
-    console.table(results);
-    runOptions();
-  });
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        message:
+          "Enter the employee ID for the employee you would like to update:",
+        name: "id",
+      },
+      {
+        type: "input",
+        message: "Enter the New Role ID for the employee:",
+        name: "roleId",
+      },
+    ])
+    .then((answers) => {
+      db.query(
+        "UPDATE employee SET role_id = ? WHERE id = ?",
+        [answers.roleId, answers.id],
+        function (err, results) {
+          if (err) throw err;
+          console.log(
+            `employee ${answers.id} has been successfully updated in the database!`
+          );
+          runOptions();
+        }
+      );
+    });
 }
 
 runOptions();
