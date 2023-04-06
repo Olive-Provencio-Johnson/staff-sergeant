@@ -113,7 +113,7 @@ function addEmployee() {
 // WHEN I choose to UPDATE an employee role
 // THEN I am prompted to select an employee to update and their new role and this information is updated in the database
 // !!!NEED to insert and PUSH into the employee role table!!!
-function updateEmployeeRole() {
+function updateEmployee() {
     db.query("SELECT * FROM role", function (err, results) {
       console.table(results);
       runOptions();
