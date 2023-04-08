@@ -12,7 +12,15 @@ npm i inquirer@8.2.4 && npm install
 5. Finally, run node server.js in the command line to connect to the database and run the application.
 
 ## How to Use this Application
-Once you have installed the application using the instructions listed above, you will be prompted to make a selection from a list of prompts. Depending on your needs, you may make your selection. See screenshot below. 
+Once you have installed the application using the instructions listed above, you will be prompted to make a selection from a list of prompts. Depending on your needs, you may make your selection. See video link and screenshot examples below. 
+
+[Link to walkthrough video that demonstrates this application's functionality](https://drive.google.com/file/d/1iip3mB08s92wL_SnwmvkPM_sS6LSql-n/view)
+
+
+![Screenshot 1](./images/screenshot1.jpg)
+![Screenshot 2](./images/screenshot2.jpg)
+
+
 
 
 
